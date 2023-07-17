@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>用户登录</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #FAD961, #F76B1C);
+    }
+    
+    .login-box {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+      width: 250px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .login-box input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #F76B1C;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username === "sjy" && password === "123456") {
+        alert("登录成功！");
+      } else {
+        alert("登录失败！请检查账号和密码是否正确。");
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="login-box">
+    <h1>用户登录</h1>
+  
+    <form onsubmit="return validateForm()">
+      <label for="username">账号:</label>
+      <input type="text" id="username" name="username" required><br><br>
+    
+      <label for="password">密码:</label>
+      <input type="password" id="password" name="password" required><br><br>
+    
+      <input type="submit" value="确认">
+    </form>
+  </div>
+</body>
+</html>
