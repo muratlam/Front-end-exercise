@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>信息管理系统</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <style>
+    /* 样式省略，可根据需要自定义 */
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>信息管理系统</h2>
+    
+    <!-- 列表 -->
+    <div v-if="showList">
+      <h3>数据列表</h3>
+      <ul>
+        <li v-for="data in dataList" :key="data.id">
+          {{ data.name }} - {{ data.age }}
+          <button @click="viewDetails(data.id)">详情</button>
+          <button @click="editData(data.id)">编辑</button>
+          <button @click="deleteData(data.id)">删除</button>
+        </li>
+      </ul>
+      <button @click="showAddForm = true">添加数据</button>
+    </div>
+    
+    <!-- 添加数据表单 -->
+    <div v-if="showAddForm">
+      <h3>添加数据</h3>
+      <form @submit.prevent="addData">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" v-model="newData.name" required><br>
+        <label for="age">年龄:</label>
+        <input type="number" id="age" v-model.number="newData.age" required><br>
+        <button type="submit">添加</button>
+        <button @click="showAddForm = false">取消</button>
+      </form>
+    </div>
+    
+    <!-- 修改数据表单 -->
+    <div v-if="showEditForm">
+      <h3>修改数据信息</h3>
+      <form @submit.prevent="updateData">
+        <label for="editName">姓名:</label>
+        <input type="text" id="editName" v-model="editedData.name" required><br>
+        <label for="editAge">年龄:</label>
+        <input type="number" id="editAge" v-model.number="editedData.age" required><br>
+        <button type="submit">保存</button>
+        <button @click="showEditForm = false">取消</button>
+      </form>
+    </div>
+    
+    <!-- 详情查看 -->
+    <div v-if="showDetails">
+      <h3>数据详情</h3>
+      <p>姓名: {{ selectedData.name }}</p>
+      <p>年龄: {{ selectedData.age }}</p>
+      <button @click="showDetails = false">关闭</button>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        showList: true,
+        showAddForm: false,
+        showEditForm: false,
+        showDetails: false,
+        dataList: [],
+        newData: {name: '', age: ''},
+        editedData: {id: null, name: '', age:
